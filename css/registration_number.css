@@ -1,0 +1,50 @@
+@font-face {
+	font-family: "Registration Number";
+	src: url("../assets/fonts/gl-nummernschild-font/GlNummernschildMtl-LrZZ.ttf");
+}
+
+/* ==================== MAIN ==================== */
+
+:root {
+	font-size: 20px;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 100vh;
+}
+
+/* ==================== REGISTRATION NUMBER PLATES ==================== */
+
+.plate {
+	background-color: lightgrey;
+
+	font-size: 6em;
+	font-family: "Registration Number", "Segoe UI", sans-serif;
+
+	border: 5px solid black;
+	border-radius: 20px;
+	padding: 0 20px;
+	margin: 10px;
+}
+
+/* ==================== LAYOUT GUIDES ==================== */
+
+* {
+	outline: 1px solid magenta;
+}
+
+:root, html {
+	outline: none;
+}
+
+body {
+	outline: none;
+	box-shadow: 0 0 100px black;
+}
+
+.plate {
+	outline: 1px solid cyan;
+}
