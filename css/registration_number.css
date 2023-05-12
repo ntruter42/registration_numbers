@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 @font-face {
 	font-family: "Registration Number";
 	src: url("../assets/fonts/gl-nummernschild-font/GlNummernschildMtl-LrZZ.ttf");
@@ -6,7 +8,8 @@
 /* ==================== MAIN ==================== */
 
 :root {
-	font-size: 20px;
+	font-family: 'PT Sans', 'Segoe UI', sans-serif;
+	font-size: 16px;
 }
 
 body {
@@ -16,27 +19,52 @@ body {
 	height: 100vh;
 }
 
+/* ==================== FORM ==================== */
+
+#form-container {
+	font-size: 2em;
+
+	border: 4px solid black;
+	border-radius: 10px;
+	margin: 20px;
+	padding: 20px;
+}
+
+#form-container label {
+	display: flex;
+	flex-direction: column;
+}
+
+#form-container label input {
+	margin: 10px 0;
+}
+
+#form-container label button {
+	margin: auto;
+}
+
 /* ==================== REGISTRATION NUMBER PLATES ==================== */
 
 .plate {
-	background-color: lightgrey;
-
-	font-size: 6em;
+	font-size: 4em;
 	font-family: "Registration Number", "Segoe UI", sans-serif;
 
+	background-color: lightgrey;
+
 	border: 5px solid black;
-	border-radius: 20px;
+	border-radius: 15px;
 	padding: 0 20px;
 	margin: 10px;
 }
 
 /* ==================== LAYOUT GUIDES ==================== */
-
+/*
 * {
 	outline: 1px solid magenta;
 }
 
-:root, html {
+:root,
+html {
 	outline: none;
 }
 
