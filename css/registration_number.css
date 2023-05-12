@@ -45,20 +45,32 @@ body {
 
 /* ==================== REGISTRATION NUMBER PLATES ==================== */
 
+#reg-num-container {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+#reg-num-container li {
+	padding: 0;
+	margin: 20px;
+}
+
 .plate {
-	font-size: 4em;
+	font-size: 6em;
 	font-family: "Registration Number", "Segoe UI", sans-serif;
 
 	background-color: lightgrey;
 
+	display: flex;
+	justify-content: center;
+
 	border: 5px solid black;
 	border-radius: 15px;
-	padding: 0 20px;
-	margin: 10px;
 }
 
 /* ==================== LAYOUT GUIDES ==================== */
-/*
+
 * {
 	outline: 1px solid magenta;
 }
@@ -71,6 +83,14 @@ html {
 body {
 	outline: none;
 	box-shadow: 0 0 100px black;
+}
+
+ul {
+	outline: 1px solid green;
+}
+
+li {
+	outline: 1px solid yellow;
 }
 
 .plate {
