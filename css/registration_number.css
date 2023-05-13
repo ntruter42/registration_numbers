@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 @font-face {
-	font-family: "Registration Number";
-	src: url("../assets/fonts/gl-nummernschild-font/GlNummernschildMtl-LrZZ.ttf");
+	font-family: 'Registration Number';
+	src: url('../assets/fonts/gl-nummernschild-font/GlNummernschildMtl-LrZZ.ttf');
 }
 
 /* ==================== MAIN ==================== */
@@ -13,6 +13,8 @@
 }
 
 body {
+	background-color: white;
+
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -23,6 +25,8 @@ body {
 
 #form-container {
 	font-size: 2em;
+
+	background-color: white;
 
 	border: 4px solid black;
 	border-radius: 10px;
@@ -36,6 +40,8 @@ body {
 }
 
 #form-container label input {
+	text-align: center;
+
 	margin: 10px 0;
 }
 
@@ -47,6 +53,7 @@ body {
 
 #reg-num-container {
 	list-style: none;
+
 	padding: 0;
 	margin: 0;
 }
@@ -57,32 +64,34 @@ body {
 }
 
 .plate {
-	font-size: 6em;
-	font-family: "Registration Number", "Segoe UI", sans-serif;
+	font-size: 4em;
+	font-family: 'Registration Number', 'PT Sans', 'Segoe UI', sans-serif;
 
 	background-color: lightgrey;
 
 	display: flex;
 	justify-content: center;
 
+	width: 300px;
 	border: 5px solid black;
 	border-radius: 15px;
+	/* padding: 0 10px; */
 }
 
 /* ==================== LAYOUT GUIDES ==================== */
-
+/*
 * {
 	outline: 1px solid magenta;
 }
 
 :root,
-html {
+html,
+body {
 	outline: none;
 }
 
-body {
-	outline: none;
-	box-shadow: 0 0 100px black;
+form {
+	outline: 1px solid blue;
 }
 
 ul {

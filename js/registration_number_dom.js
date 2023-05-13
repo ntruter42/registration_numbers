@@ -5,7 +5,10 @@ const button = document.querySelector('#reg-button');
 // OUTPUT ELEMENTS
 const regNumList = document.querySelector('#reg-num-container');
 
-function addRegNumPlate(regNumInput) {
+// INITIALISATION
+const registrationNumber = RegistrationNumber();
+
+function addRegPlate(regNumInput) {
 	const regNumItem = document.createElement('li');
 	if (regNumItem) {
 		const regNumPlate = document.createElement('div');
@@ -27,6 +30,8 @@ function addRegNumPlate(regNumInput) {
 
 button.addEventListener('click', function () {
 	if (input.value) {
-		addRegNumPlate(input.value);
+		addRegPlate(input.value);
+	} else {
+		alert("Enter a registration number");
 	}
 });
