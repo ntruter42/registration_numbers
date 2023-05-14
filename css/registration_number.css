@@ -8,27 +8,43 @@
 /* ==================== MAIN ==================== */
 
 :root {
+	--bg-color: #ffff;
+	--ol-color: #000f;
+
+	--ibg-color: #fff0;
+	--iol-color: #0000;
+
+	--obg-color: #ffff;
+	--ool-color: #000f;
+
+	--plate-gradient: linear-gradient(#ddd, #aaa);
+	/* --plate-gradient: linear-gradient(#d3d3d3, #d3d3d3); */
+
 	font-family: 'PT Sans', 'Segoe UI', sans-serif;
 	font-size: 16px;
 }
 
 body {
-	background-color: white;
+	background-image: url('../assets/images/2020-tesla-roadster.png');
+	background-size: cover;
+	background-position: left;
 
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+
 	height: 100vh;
 }
 
-/* ==================== FORM ==================== */
+/* ==================== INPUT FORM ==================== */
 
 #form-container {
-	font-size: 2em;
+	font-size: 2rem;
 
-	background-color: white;
+	background-color: var(--bg-color);
+	border: 2px solid var(--ol-color);
 
-	border: 4px solid black;
+	height: auto;
 	border-radius: 10px;
 	margin: 20px;
 	padding: 20px;
@@ -46,37 +62,91 @@ body {
 }
 
 #form-container label button {
+	padding: 0 10px;
 	margin: auto;
+}
+
+/* ==================== REGISTRATION NUMBER DISPLAY ==================== */
+
+#display-container {
+	background-color: var(--obg-color);
+	border: 2px solid var(--ool-color);
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	border-radius: 20px;
+}
+
+/* ==================== FILTER FORM ==================== */
+
+#filter-container {
+	background-color: var(--ibg-color);
+	border: 2px solid var(--iol-color);
+
+	justify-content: center;
+	align-items: center;
+
+	padding: 10px 20px;
+	margin-bottom: 20px;
+	border-radius: 10px;
 }
 
 /* ==================== REGISTRATION NUMBER PLATES ==================== */
 
 #reg-num-container {
-	list-style: none;
+	background-color: var(--ibg-color);
+	border: 2px solid var(--iol-color);
 
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: flex-start;
+
+	width: 330px;
+	min-width: 330px;
+	max-width: 990px;
+	max-height: calc(100vh - 360px);
 	padding: 0;
 	margin: 0;
+	border-radius: 20px;
+
+	resize: horizontal;
+	overflow: auto;
+	list-style: none;
 }
 
 #reg-num-container li {
 	padding: 0;
-	margin: 20px;
+	margin: 10px;
 }
 
 .plate {
-	font-size: 4em;
+	font-size: 4rem;
 	font-family: 'Registration Number', 'PT Sans', 'Segoe UI', sans-serif;
 
-	background-color: lightgrey;
+	background-image: var(--plate-gradient);
 
 	display: flex;
 	justify-content: center;
 
+	height: 74px;
 	width: 300px;
 	border: 5px solid black;
 	border-radius: 15px;
-	/* padding: 0 10px; */
 }
+
+/* ==================== ANIMATIONS ==================== */
+
+.plate {
+	transition: all 1s ease-in-out;
+}
+
+/* ==================== RESPONSIVENESS ==================== */
+
+@media (min-width: 1250px) {}
 
 /* ==================== LAYOUT GUIDES ==================== */
 /*
@@ -104,4 +174,18 @@ li {
 
 .plate {
 	outline: 1px solid cyan;
+}
+
+/* order of properties
+
+element {
+	font
+
+	color
+
+	flow
+
+	shape
+
+	misc
 }

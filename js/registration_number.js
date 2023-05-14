@@ -1,10 +1,16 @@
 function RegistrationNumber() {
 	let regNum = '';
-	let registrationNumbers = {};
-
+	let regList = {};
 	
-	function setReg(regNumInput) {
-		regNum = regNumInput;
+	// Sample regList for testing
+	// let regList = {
+	// 	"CJ 21024": "CJ",
+	// 	"CK 42 505": "CK",
+	// 	"CA 543-012": "CA"
+	// };
+
+	function setReg(regNumValue) {
+		regNum = regNumValue;
 	}
 
 	function getReg() {
@@ -17,17 +23,27 @@ function RegistrationNumber() {
 	}
 
 	function addToRegList() {
-		if (registrationNumbers[regNum] === undefined) {
-			registrationNumbers[regNum] = 1;
+		if (regList[regNum] === undefined) {
+			regList[regNum] = regNum.slice(0, 2);
 		}
 	}
 
-	function setRegList(regListInput) {
-		registrationNumbers = regListInput;
+	function removeFromRegList(regNumValue) {
+		if (regList[regNumValue] !== undefined) {
+			delete regList[regNumValue];
+		}
+	}
+
+	function setRegList(regListValue) {
+		regList = regListValue;
 	}
 
 	function getRegList() {
-		return registrationNumbers;
+		return regList;
+	}
+
+	function clearRegList() {
+		regList = {};
 	}
 
 	return {
@@ -35,7 +51,9 @@ function RegistrationNumber() {
 		getReg,
 		isValidReg,
 		addToRegList,
+		removeFromRegList,
 		setRegList,
-		getRegList
+		getRegList,
+		clearRegList
 	};
 }

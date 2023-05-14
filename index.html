@@ -14,28 +14,30 @@
 	<form id="form-container">
 		<label for="reg-input">
 			<span>Registration Number:</span>
-			<input id="reg-input" type="text" name="reg-input">
+			<input id="reg-input" class="plate" type="text" name="reg-input" maxlength="10">
 			<button id="reg-button" type="button">ADD</button>
 		</label>
 	</form>
 
-	<ul id="reg-num-container">
-		<li>
-			<div class="plate">
-				<span class="reg-num">CJ 21024</span>
-			</div>
-		</li>
-		<li>
-			<div class="plate">
-				<span class="reg-num">CK 42 505</span>
-			</div>
-		</li>
-		<li>
-			<div class="plate">
-				<span class="reg-num">CA 543-012</span>
-			</div>
-		</li>
-	</ul>
+	<div id="display-container">
+		<form id="filter-container">
+			<label for="reg-filter">Filter
+				<select name="reg-filter" id="reg-filter">
+					<option value="">Show All</option>
+					<option value="ca">Cape Town (CA)</option>
+					<option value="cf">Kuils River (CF)</option>
+					<option value="cg">Oudtshoorn (CG)</option>
+					<option value="cj">Paarl (CJ)</option>
+					<option value="ck">Malmesbury (CK)</option>
+					<option value="cl">Stellenbosch (CL)</option>
+				</select>
+			</label>
+			<button id="reg-clear" type="button">CLEAR</button>
+		</form>
+
+		<ul id="reg-num-container">
+		</ul>
+	</div>
 </body>
 
 <script src="js/registration_number.js" charset="utf-8"></script>
