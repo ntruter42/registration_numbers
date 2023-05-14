@@ -1,6 +1,6 @@
 function RegistrationNumber() {
 	let regNum = '';
-	let regList = {};
+	let regList = JSON.parse(localStorage.getItem('regList')) || {};
 
 	// Sample regList for testing
 	// let regList = {
@@ -35,6 +35,7 @@ function RegistrationNumber() {
 		if (regList[regNum] === undefined) {
 			regList[regNum] = regNum.slice(0, 2);
 		}
+		localStorage.setItem('regList', JSON.stringify(regList));
 	}
 
 	function removeFromRegList(regNumValue) {
@@ -53,6 +54,7 @@ function RegistrationNumber() {
 
 	function clearRegList() {
 		regList = {};
+		localStorage.removeItem("regList");
 	}
 
 	return {
