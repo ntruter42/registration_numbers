@@ -140,10 +140,6 @@ body {
 
 /* ==================== ANIMATIONS ==================== */
 
-.plate {
-	transition: all 1s ease-in-out;
-}
-
 /* ==================== RESPONSIVENESS ==================== */
 
 @media (min-width: 1250px) {}

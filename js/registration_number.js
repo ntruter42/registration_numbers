@@ -1,7 +1,7 @@
 function RegistrationNumber() {
 	let regNum = '';
 	let regList = {};
-	
+
 	// Sample regList for testing
 	// let regList = {
 	// 	"CJ 21024": "CJ",
@@ -18,8 +18,17 @@ function RegistrationNumber() {
 	}
 
 	function isValidReg() {
-		// TODO: create proper regex
-		return /^[a-zA-Z]+((-| )[a-zA-Z]+)?$/.test(regNum);
+		// TODO: fix regex to match:
+		// CA 123456
+		// CF 1
+		// CK 0467 21
+		// CL 4 2
+		// CG 456 - 789
+		// CJ 1 - 23
+		// CA546
+		// CJ99 - 0
+		// CK8 0565
+		return /^([C][A|F|G|J|K|L])( |)(\d{1,6}|\d{1,5}(-| )\d{1,5})$/.test(regNum);
 	}
 
 	function addToRegList() {

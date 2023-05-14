@@ -2,14 +2,14 @@
 const input = document.querySelector('#reg-input');
 const button = document.querySelector('#reg-button');
 const select = document.querySelector('#reg-filter');
-const option = select.options[select.selectedIndex];
+let option = select.options[select.selectedIndex];
 
 // OUTPUT ELEMENTS
 const regNumList = document.querySelector('#reg-num-container');
 
 // INITIALISATION
 const reg = RegistrationNumber();
-// showRegPlates(option.value);
+showRegPlates(option.value);
 
 function addRegPlate(regNumInput) {
 	if (regNumInput) {
@@ -24,7 +24,7 @@ function addRegPlate(regNumInput) {
 				const regNum = document.createElement('span');
 				if (regNum) {
 					regNum.classList.add('reg-num');
-					regNum.innerHTML = reg.getReg().toUpperCase();
+					regNum.innerHTML = regNumInput.toUpperCase();
 
 					regNumPlate.appendChild(regNum);
 					regNumItem.appendChild(regNumPlate);
@@ -35,9 +35,25 @@ function addRegPlate(regNumInput) {
 	}
 }
 
+function addValidRegPlate() {
+	if (input.value) {
+		reg.setReg(input.value);
+		if (reg.isValidReg()) {
+			reg.addToRegList();
+			showRegPlates(option.value);
+		} else {
+			alert("Registration number is invalid");
+		}
+	} else {
+		alert("Enter a registration number");
+	}
+}
+
 function showRegPlates(filter) {
+	clearRegPlates();
+
 	for (const regNum of Object.keys(reg.getRegList())) {
-		if (regNum.startsWith(filter) || filter === "aa") {
+		if (regNum.startsWith(filter) || filter === "") {
 			addRegPlate(regNum);
 		}
 	}
@@ -52,18 +68,11 @@ function clearRegPlates() {
 	});
 }
 
-button.addEventListener('click', function () {
-	if (input.value) {
-		reg.setReg(input.value);
-		if (reg.isValidReg()) {
-			reg.addToRegList();
-			showRegPlates(option.value);
-		} else {
-			alert("Registration number is invalid");
-		}
-	} else {
-		alert("Enter a registration number");
-	}
+button.addEventListener('click', addValidRegPlate);
+
+select.addEventListener('change', function () {
+	option = select.options[select.selectedIndex];
+	showRegPlates(option.value);
 });
 
 // TODO: snap registration display window
