@@ -1,6 +1,7 @@
 // INPUT ELEMENTS
 const input = document.querySelector('#reg-input');
 const button = document.querySelector('#reg-button');
+const clear = document.querySelector('#reg-clear');
 const select = document.querySelector('#reg-filter');
 let option = select.options[select.selectedIndex];
 
@@ -37,10 +38,13 @@ function addRegPlate(regNumInput) {
 
 function addValidRegPlate() {
 	if (input.value) {
-		reg.setReg(input.value);
+		reg.setReg(input.value.toUpperCase());
 		if (reg.isValidReg()) {
-			reg.addToRegList();
-			showRegPlates(option.value);
+			if (reg.addToRegList()) {
+				showRegPlates(option.value);
+			} else {
+				alert("Registration number was already added");
+			}
 		} else {
 			alert("Registration number is invalid");
 		}
@@ -51,10 +55,12 @@ function addValidRegPlate() {
 
 function showRegPlates(filter) {
 	clearRegPlates();
+	let count = 0;
 
 	for (const regNum of Object.keys(reg.getRegList())) {
 		if (regNum.startsWith(filter) || filter === "") {
 			addRegPlate(regNum);
+			count++;
 		}
 	}
 }
@@ -73,6 +79,11 @@ button.addEventListener('click', addValidRegPlate);
 select.addEventListener('change', function () {
 	option = select.options[select.selectedIndex];
 	showRegPlates(option.value);
+});
+
+clear.addEventListener('click', function () {
+	reg.clearRegList();
+	clearRegPlates();
 });
 
 // TODO: snap registration display window
