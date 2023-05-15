@@ -42,6 +42,26 @@ function RegistrationNumber() {
 		localStorage.removeItem("regList");
 	}
 
+	function addExceptionMessage() {
+		if (regNum === '') {
+			return { 'Enter a registration number': 'red' };
+		} else if (!isValidReg()) {
+			return { 'Registration number is invalid': 'red' };
+		} else if (!addToRegList()) {
+			return { 'Registration number already exists': 'orange' };
+		} else {
+			return { 'Registration number added succesfully': 'green' };
+		}
+	}
+
+	function clearExceptionMessage() {
+		if (regNumList !== {}) {
+			return { 'Registration numbers NOT cleared': 'orange' };
+		} else {
+			return { 'Registration numbers cleared succesfully': 'green' };
+		}
+	}
+
 	return {
 		setReg,
 		getReg,
@@ -50,6 +70,8 @@ function RegistrationNumber() {
 		removeFromRegList,
 		setRegList,
 		getRegList,
-		clearRegList
+		clearRegList,
+		addExceptionMessage,
+		clearExceptionMessage
 	};
 }

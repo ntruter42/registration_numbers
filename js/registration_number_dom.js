@@ -17,31 +17,36 @@ let messageTimeout = 0;
 const reg = RegistrationNumber();
 showRegPlates(option.value);
 
-function displayMessage(message, color) {
+function displayMessage(msgObj) {
 	clearTimeout(messageTimeout);
-	messageBox.classList.remove('hidden', 'red', 'orange', 'green');
 
-	messageText.innerHTML = message;
+	for (const message in msgObj) {
+		const color = msgObj[message];
 
-	switch (color) {
-		case 'red':
-			messageBox.classList.add('red');
-			break;
-		case 'orange':
-			messageBox.classList.add('orange');
-			break;
-		case 'green':
-			messageBox.classList.add('green');
-			break;
-		default:
-			break;
+		messageBox.classList.remove('hidden', 'red', 'orange', 'green');
+
+		messageText.innerHTML = message;
+
+		switch (color) {
+			case 'red':
+				messageBox.classList.add('red');
+				break;
+			case 'orange':
+				messageBox.classList.add('orange');
+				break;
+			case 'green':
+				messageBox.classList.add('green');
+				break;
+			default:
+				break;
+		}
+		messageBox.classList.add('scale-forward');
+
+		let duration = message.length * 100 - (Math.floor(message.length / 10) * 100);
+		messageTimeout = setTimeout(function () {
+			messageBox.classList.add('hidden');
+		}, duration);
 	}
-	messageBox.classList.add('scale-forward');
-
-	let duration = message.length * 100 - (Math.floor(message.length / 10) * 100);
-	messageTimeout = setTimeout(function () {
-		messageBox.classList.add('hidden');
-	}, duration);
 }
 
 function addRegPlate(regNumInput) {
@@ -71,15 +76,8 @@ function addRegPlate(regNumInput) {
 function addValidRegPlate() {
 	reg.setReg(input.value.toUpperCase());
 
-	if (input.value === '') {
-		displayMessage('Enter a registration number', 'red');
-	} else if (!reg.isValidReg()) {
-		displayMessage('Registration number is invalid', 'red');
-	} else if (!reg.addToRegList()) {
-		displayMessage('Registration number already exists', 'red');
-	} else {
-		displayMessage('Registration number added succesfully', 'green');
-	}
+	displayMessage(reg.addExceptionMessage());
+
 	showRegPlates(option.value);
 }
 
@@ -111,10 +109,10 @@ select.addEventListener('change', function () {
 
 clear.addEventListener('click', function () {
 	if (confirm("Are you sure you want to clear all registration numbers?") === true) {
-		reg.clearRegList();
+		// reg.clearRegList();
 		clearRegPlates();
-		displayMessage('Registration numbers cleared succesfully', 'green');
 	}
+	displayMessage(reg.clearExceptionMessage());
 });
 
 // TODO: snap registration display window
