@@ -11,7 +11,7 @@ function RegistrationNumber() {
 	}
 
 	function isValidReg() {
-		return /^C[AFGJKL] ?(?=(?:\d+[ -]\d+$|\d{1,6}$))[\d -]{1,7}$/.test(regNum);
+		return /^C[AFGJKL](?! ?\d{7}) ?\d+(?:[ -]\d+)?$/.test(regNum);
 	}
 
 	function addToRegList() {

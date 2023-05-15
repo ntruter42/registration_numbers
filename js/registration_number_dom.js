@@ -7,10 +7,42 @@ let option = select.options[select.selectedIndex];
 
 // OUTPUT ELEMENTS
 const regNumList = document.querySelector('#reg-num-container');
+const messageBox = document.querySelector('#message-container');
+const messageText = document.querySelector('#reg-message');
+
+// FUNTIONALITY
+let messageTimeout = 0;
 
 // INITIALISATION
 const reg = RegistrationNumber();
 showRegPlates(option.value);
+
+function displayMessage(message, color) {
+	clearTimeout(messageTimeout);
+	messageBox.classList.remove('hidden', 'red', 'orange', 'green');
+
+	messageText.innerHTML = message;
+
+	switch (color) {
+		case 'red':
+			messageBox.classList.add('red');
+			break;
+		case 'orange':
+			messageBox.classList.add('orange');
+			break;
+		case 'green':
+			messageBox.classList.add('green');
+			break;
+		default:
+			break;
+	}
+	messageBox.classList.add('scale-forward');
+
+	let duration = message.length * 100 - (Math.floor(message.length / 10) * 100);
+	messageTimeout = setTimeout(function () {
+		messageBox.classList.add('hidden');
+	}, duration);
+}
 
 function addRegPlate(regNumInput) {
 	if (regNumInput) {
@@ -37,30 +69,26 @@ function addRegPlate(regNumInput) {
 }
 
 function addValidRegPlate() {
-	if (input.value) {
-		reg.setReg(input.value.toUpperCase());
-		if (reg.isValidReg()) {
-			if (reg.addToRegList()) {
-				showRegPlates(option.value);
-			} else {
-				alert("Registration number was already added");
-			}
-		} else {
-			alert("Registration number is invalid");
-		}
+	reg.setReg(input.value.toUpperCase());
+
+	if (input.value === '') {
+		displayMessage('Enter a registration number', 'red');
+	} else if (!reg.isValidReg()) {
+		displayMessage('Registration number is invalid', 'red');
+	} else if (!reg.addToRegList()) {
+		displayMessage('Registration number already exists', 'red');
 	} else {
-		alert("Enter a registration number");
+		displayMessage('Registration number added succesfully', 'green');
 	}
+	showRegPlates(option.value);
 }
 
 function showRegPlates(filter) {
 	clearRegPlates();
-	let count = 0;
 
 	for (const regNum of Object.keys(reg.getRegList())) {
 		if (regNum.startsWith(filter) || filter === "") {
 			addRegPlate(regNum);
-			count++;
 		}
 	}
 }
