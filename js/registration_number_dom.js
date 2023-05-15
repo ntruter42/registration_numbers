@@ -110,8 +110,11 @@ select.addEventListener('change', function () {
 });
 
 clear.addEventListener('click', function () {
-	reg.clearRegList();
-	clearRegPlates();
+	if (confirm("Are you sure you want to clear all registration numbers?") === true) {
+		reg.clearRegList();
+		clearRegPlates();
+		displayMessage('Registration numbers cleared succesfully', 'green');
+	}
 });
 
 // TODO: snap registration display window
