@@ -24,6 +24,7 @@ function displayMessage(msgObj) {
 		const color = msgObj[message];
 
 		messageBox.classList.remove('hidden', 'red', 'orange', 'green');
+		regNumList.classList.add('display-height-offset');
 
 		messageText.innerHTML = message;
 
@@ -40,12 +41,35 @@ function displayMessage(msgObj) {
 			default:
 				break;
 		}
-		messageBox.classList.add('scale-forward');
 
-		let duration = message.length * 100 - (Math.floor(message.length / 10) * 100);
-		messageTimeout = setTimeout(function () {
-			messageBox.classList.add('hidden');
-		}, duration);
+		let duration = message.length * 100;
+
+		if (message === 'Registration code is invalid') {
+			messageTimeout = setTimeout(function () {
+				messageText.innerHTML = 'Valid registration codes: ';
+				messageText.innerHTML += '<b>CA</b>, <b>CF</b>, <b>CG</b>, <b>CJ</b>, <b>CK</b>, <b>CL</b>';
+
+				messageBox.classList.remove('red', 'orange', 'green');
+				messageBox.classList.add('transparent');
+			}, duration);
+		}
+
+		else if (message === 'Registration number is invalid') {
+			messageTimeout = setTimeout(function () {
+				messageText.innerHTML = 'Valid example inputs: ';
+				messageText.innerHTML += '<b>CA123456</b>, <b>CF 456 789</b>, <b>CG 789-012</b>, <b>CJ 345</b>';
+
+				messageBox.classList.remove('red', 'orange', 'green');
+				messageBox.classList.add('transparent');
+			}, duration);
+		}
+
+		else {
+			messageTimeout = setTimeout(function () {
+				messageBox.classList.add('hidden');
+				regNumList.classList.remove('display-height-offset');
+			}, duration);
+		}
 	}
 }
 

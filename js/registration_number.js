@@ -14,6 +14,10 @@ function RegistrationNumber() {
 		return /^C[AFGJKL](?! ?\d{7}) ?\d+(?:[ -]\d+)?$/.test(regNum);
 	}
 
+	function isValidCode() {
+		return /C[AFGJKL]/.test(regNum.slice(0,2));
+	}
+
 	function addToRegList() {
 		if (regList[regNum] === undefined) {
 			regList[regNum] = regNum.slice(0, 2);
@@ -42,11 +46,16 @@ function RegistrationNumber() {
 		localStorage.removeItem("regList");
 	}
 
+	// TODO: add exceptions within individual functions
 	function addExceptionMessage() {
 		if (regNum === '') {
 			return { 'Enter a registration number': 'red' };
 		} else if (!isValidReg()) {
-			return { 'Registration number is invalid': 'red' };
+			if (!isValidCode()) {
+				return { 'Registration code is invalid': 'red' };
+			} else {
+				return { 'Registration number is invalid': 'red' };
+			}
 		} else if (!addToRegList()) {
 			return { 'Registration number already exists': 'orange' };
 		} else {
@@ -66,6 +75,7 @@ function RegistrationNumber() {
 		setReg,
 		getReg,
 		isValidReg,
+		isValidCode,
 		addToRegList,
 		removeFromRegList,
 		setRegList,
