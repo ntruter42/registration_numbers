@@ -21,7 +21,7 @@ showRegPlates(option.value);
 
 function showEmpty(code) {
 	if (!regNumList.firstElementChild && code !== '') {
-		emptyText.innerHTML = 'No registration numbers for<br>' + reg.getRegCode(code) + ' (' + code + ')';
+		emptyText.innerHTML = 'No registration numbers for<br>' + reg.getRegTown(code) + ' (' + code + ')';
 		emptyBox.classList.remove('hidden');
 		regNumList.style.resize = 'none';
 	} else if (!regNumList.firstElementChild && code === '') {
@@ -69,9 +69,7 @@ function displayMessage(msgObj) {
 				messageBox.classList.remove('red', 'orange', 'green');
 				messageBox.classList.add('transparent');
 			}, duration);
-		}
-
-		else if (message === 'Registration number is invalid') {
+		} else if (message === 'Registration number format is invalid') {
 			messageTimeout = setTimeout(function () {
 				messageText.innerHTML = 'Valid format examples: ';
 				messageText.innerHTML += '<b>CA123456</b>, <b>CF 456 789</b>, <b>CG 789-012</b>, <b>CJ 345</b>';
@@ -79,9 +77,7 @@ function displayMessage(msgObj) {
 				messageBox.classList.remove('red', 'orange', 'green');
 				messageBox.classList.add('transparent');
 			}, duration);
-		}
-
-		else {
+		} else {
 			messageTimeout = setTimeout(function () {
 				messageBox.classList.add('hidden');
 				regNumList.classList.remove('display-height-offset');
@@ -93,9 +89,8 @@ function displayMessage(msgObj) {
 function addValidRegPlate() {
 	reg.setReg(input.value.toUpperCase());
 	displayMessage(reg.addExceptionMessage());
-	input.value = "";
-
 	showRegPlates(option.value);
+	input.value = "";
 }
 
 function addRegPlate(regNumInput) {
@@ -145,6 +140,13 @@ function clearRegPlates() {
 }
 
 button.addEventListener('click', addValidRegPlate);
+
+input.addEventListener('keydown', function (event) {
+	if (event.keyCode === 13) {
+		event.preventDefault();
+		addValidRegPlate();
+	}
+});
 
 select.addEventListener('change', function () {
 	option = select.options[select.selectedIndex];

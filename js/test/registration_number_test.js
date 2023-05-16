@@ -22,7 +22,21 @@ describe('RegistrationNumber', function () {
 
 	describe('isValidReg', function () {
 		it('should return true for the reg "CA 123456"', function () {
-			reg.setReg('CA 123456');
+			reg.setReg('CA 123 456');
+
+			assert.equal(reg.isValidReg(), true);
+		});
+
+		it('should false for the reg "CJ 1234567"', function () {
+			reg.setReg('CA 1234567');
+
+			assert.equal(reg.isValidReg(), false);
+		});
+	});
+
+	describe('isValidCode', function () {
+		it('should return true for the reg "CA 123456"', function () {
+			reg.setReg('CA 123 456');
 
 			assert.equal(reg.isValidReg(), true);
 		});

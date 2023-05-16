@@ -2,6 +2,7 @@ function RegistrationNumber() {
 	let regNum = '';
 	let regList = JSON.parse(localStorage.getItem('regList')) || {};
 	let message = {};
+
 	const regTownList = {
 		'CA': 'Cape Town',
 		'CF': 'Kuils River',
@@ -20,8 +21,8 @@ function RegistrationNumber() {
 	}
 
 	function isValidReg() {
-		if (!/^C[AFGJKL](?! ?\d{7}) ?\d+(?:[ -]\d+)?$/.test(regNum)) {
-			message = "Invalid registration number format";
+		if (!/^C[AFGJKL]( |)(\d{3,6}|\d{1,5}(-| )\d{1,5})$/.test(regNum)) {
+			message = { 'Invalid registration number format': 'red' };
 			return false;
 		}
 		return true;
@@ -29,19 +30,23 @@ function RegistrationNumber() {
 
 	function isValidCode() {
 		if (!/C[AFGJKL]/.test(regNum.slice(0, 2))) {
-			message = "Invalid registration number code";
+			message = { "Invalid registration number code": 'red' };
 			return false;
 		}
 		return true;
 	}
 
-	function getRegCode(code) {
+	function getRegCode() {
+		return regNum.slice(0, 2);
+	}
+
+	function getRegTown(code) {
 		return regTownList[code];
 	}
 
 	function addToRegList() {
 		if (regList[regNum] === undefined) {
-			regList[regNum] = regNum.slice(0, 2);
+			regList[regNum] = getRegCode();
 			localStorage.setItem('regList', JSON.stringify(regList));
 			return true;
 		}
@@ -110,6 +115,7 @@ function RegistrationNumber() {
 		isValidReg,
 		isValidCode,
 		getRegCode,
+		getRegTown,
 		addToRegList,
 		removeFromRegList,
 		setRegList,
