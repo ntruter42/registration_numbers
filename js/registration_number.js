@@ -54,7 +54,7 @@ function RegistrationNumber() {
 			if (!isValidCode()) {
 				return { 'Registration code is invalid': 'red' };
 			} else {
-				return { 'Registration number is invalid': 'red' };
+				return { 'Registration number format is invalid': 'red' };
 			}
 		} else if (!addToRegList()) {
 			return { 'Registration number already exists': 'orange' };

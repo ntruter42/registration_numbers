@@ -56,7 +56,7 @@ function displayMessage(msgObj) {
 
 		else if (message === 'Registration number is invalid') {
 			messageTimeout = setTimeout(function () {
-				messageText.innerHTML = 'Valid example inputs: ';
+				messageText.innerHTML = 'Valid format examples: ';
 				messageText.innerHTML += '<b>CA123456</b>, <b>CF 456 789</b>, <b>CG 789-012</b>, <b>CJ 345</b>';
 
 				messageBox.classList.remove('red', 'orange', 'green');
@@ -99,8 +99,8 @@ function addRegPlate(regNumInput) {
 
 function addValidRegPlate() {
 	reg.setReg(input.value.toUpperCase());
-
 	displayMessage(reg.addExceptionMessage());
+	input.value = "";
 
 	showRegPlates(option.value);
 }
@@ -133,7 +133,7 @@ select.addEventListener('change', function () {
 
 clear.addEventListener('click', function () {
 	if (confirm("Are you sure you want to clear all registration numbers?") === true) {
-		// reg.clearRegList();
+		reg.clearRegList();
 		clearRegPlates();
 	}
 	displayMessage(reg.clearExceptionMessage());
