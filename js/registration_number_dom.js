@@ -9,6 +9,8 @@ let option = select.options[select.selectedIndex];
 const regNumList = document.querySelector('#reg-num-container');
 const messageBox = document.querySelector('#message-container');
 const messageText = document.querySelector('#reg-message');
+const emptyBox = document.querySelector('#empty-container');
+const emptyText = document.querySelector('#reg-empty');
 
 // FUNTIONALITY
 let messageTimeout = 0;
@@ -16,6 +18,17 @@ let messageTimeout = 0;
 // INITIALISATION
 const reg = RegistrationNumber();
 showRegPlates(option.value);
+
+function showEmpty(code) {
+	if (!regNumList.firstElementChild) {
+		emptyText.innerHTML = 'No registration numbers for ' + code;
+		emptyBox.classList.remove('hidden');
+		regNumList.style.resize = 'none';
+	} else {
+		emptyBox.classList.add('hidden');
+		regNumList.style.resize = 'horizontal';
+	}
+}
 
 function displayMessage(msgObj) {
 	clearTimeout(messageTimeout);
@@ -73,6 +86,14 @@ function displayMessage(msgObj) {
 	}
 }
 
+function addValidRegPlate() {
+	reg.setReg(input.value.toUpperCase());
+	displayMessage(reg.addExceptionMessage());
+	input.value = "";
+
+	showRegPlates(option.value);
+}
+
 function addRegPlate(regNumInput) {
 	if (regNumInput) {
 
@@ -97,14 +118,6 @@ function addRegPlate(regNumInput) {
 	}
 }
 
-function addValidRegPlate() {
-	reg.setReg(input.value.toUpperCase());
-	displayMessage(reg.addExceptionMessage());
-	input.value = "";
-
-	showRegPlates(option.value);
-}
-
 function showRegPlates(filter) {
 	clearRegPlates();
 
@@ -113,6 +126,9 @@ function showRegPlates(filter) {
 			addRegPlate(regNum);
 		}
 	}
+
+	option = select.options[select.selectedIndex];
+	showEmpty(option.value);
 }
 
 function clearRegPlates() {

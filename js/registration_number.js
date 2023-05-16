@@ -1,9 +1,18 @@
 function RegistrationNumber() {
 	let regNum = '';
 	let regList = JSON.parse(localStorage.getItem('regList')) || {};
+	let message = {};
+	const regTownList = {
+		'CA': 'Cape Town',
+		'CF': 'Kuils River',
+		'CG': 'Oudtshoorn',
+		'CJ': 'Paarl',
+		'CK': 'Malmesbury',
+		'CL': 'Stellenbosch'
+	};
 
 	function setReg(regNumValue) {
-		regNum = regNumValue;
+		regNum = regNumValue.toUpperCase();
 	}
 
 	function getReg() {
@@ -11,11 +20,23 @@ function RegistrationNumber() {
 	}
 
 	function isValidReg() {
-		return /^C[AFGJKL](?! ?\d{7}) ?\d+(?:[ -]\d+)?$/.test(regNum);
+		if (!/^C[AFGJKL](?! ?\d{7}) ?\d+(?:[ -]\d+)?$/.test(regNum)) {
+			message = "Invalid registration number format";
+			return false;
+		}
+		return true;
 	}
 
 	function isValidCode() {
-		return /C[AFGJKL]/.test(regNum.slice(0,2));
+		if (!/C[AFGJKL]/.test(regNum.slice(0, 2))) {
+			message = "Invalid registration number code";
+			return false;
+		}
+		return true;
+	}
+
+	function getRegCode(code) {
+		return regTownList[code];
 	}
 
 	function addToRegList() {
@@ -44,6 +65,10 @@ function RegistrationNumber() {
 	function clearRegList() {
 		regList = {};
 		localStorage.removeItem("regList");
+
+		// Uncomment and alter to delete individual entries
+		// delete regList['CJ 20025 9'];
+		// localStorage.setItem('regList', JSON.stringify(regList));
 	}
 
 	// TODO: add exceptions within individual functions
@@ -71,17 +96,28 @@ function RegistrationNumber() {
 		}
 	}
 
+	function setMessage(messageValue, type) {
+		message = { messageValue: type };
+	}
+
+	function getMessage() {
+		return message;
+	}
+
 	return {
 		setReg,
 		getReg,
 		isValidReg,
 		isValidCode,
+		getRegCode,
 		addToRegList,
 		removeFromRegList,
 		setRegList,
 		getRegList,
 		clearRegList,
 		addExceptionMessage,
-		clearExceptionMessage
+		clearExceptionMessage,
+		setMessage,
+		getMessage
 	};
 }

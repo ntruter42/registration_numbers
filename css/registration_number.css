@@ -96,6 +96,12 @@ body {
 	margin-bottom: 20px;
 }
 
+#empty-container {
+	font-size: 1.5em;
+
+	margin: 20px;
+}
+
 .hidden {
 	display: none !important;
 }
