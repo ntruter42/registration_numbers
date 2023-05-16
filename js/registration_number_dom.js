@@ -21,7 +21,7 @@ showRegPlates(option.value);
 
 function showEmpty(code) {
 	if (!regNumList.firstElementChild && code !== '') {
-		emptyText.innerHTML = 'No registration numbers for ' + code;
+		emptyText.innerHTML = 'No registration numbers for ' + reg.getRegCode(code) + ' (' + code + ')';
 		emptyBox.classList.remove('hidden');
 		regNumList.style.resize = 'none';
 	} else if (!regNumList.firstElementChild && code === '') {
