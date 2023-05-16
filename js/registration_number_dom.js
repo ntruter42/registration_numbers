@@ -20,8 +20,12 @@ const reg = RegistrationNumber();
 showRegPlates(option.value);
 
 function showEmpty(code) {
-	if (!regNumList.firstElementChild) {
+	if (!regNumList.firstElementChild && code !== '') {
 		emptyText.innerHTML = 'No registration numbers for ' + code;
+		emptyBox.classList.remove('hidden');
+		regNumList.style.resize = 'none';
+	} else if (!regNumList.firstElementChild && code === '') {
+		emptyText.innerHTML = 'No registration numbers';
 		emptyBox.classList.remove('hidden');
 		regNumList.style.resize = 'none';
 	} else {
@@ -151,8 +155,8 @@ clear.addEventListener('click', function () {
 	if (confirm("Are you sure you want to clear all registration numbers?") === true) {
 		reg.clearRegList();
 		clearRegPlates();
+		displayMessage(reg.clearExceptionMessage());
 	}
-	displayMessage(reg.clearExceptionMessage());
 });
 
 // TODO: snap registration display window

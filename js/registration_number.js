@@ -89,7 +89,7 @@ function RegistrationNumber() {
 	}
 
 	function clearExceptionMessage() {
-		if (regNumList !== {}) {
+		if (!regNumList) {
 			return { 'Registration numbers NOT cleared': 'orange' };
 		} else {
 			return { 'Registration numbers cleared succesfully': 'green' };
