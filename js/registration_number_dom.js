@@ -21,7 +21,7 @@ showRegPlates(option.value);
 
 function showEmpty(code) {
 	if (!regNumList.firstElementChild && code !== '') {
-		emptyText.innerHTML = 'No registration numbers for ' + reg.getRegCode(code) + ' (' + code + ')';
+		emptyText.innerHTML = 'No registration numbers for<br>' + reg.getRegCode(code) + ' (' + code + ')';
 		emptyBox.classList.remove('hidden');
 		regNumList.style.resize = 'none';
 	} else if (!regNumList.firstElementChild && code === '') {
@@ -155,6 +155,7 @@ clear.addEventListener('click', function () {
 	if (confirm("Are you sure you want to clear all registration numbers?") === true) {
 		reg.clearRegList();
 		clearRegPlates();
+		showRegPlates(option.value);
 		displayMessage(reg.clearExceptionMessage());
 	}
 });
